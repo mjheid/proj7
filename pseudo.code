@@ -1,0 +1,50 @@
+time-forward simulation of SNPs
+====================================
+# Load SNP Data, ind*SNPs
+data = load(path/to/data)
+
+# define population that each indivdual belongs to, %divergence?
+data[pop_id] = get_population(data)
+
+time_steps = 100
+
+# matrix of percentage of each pop that survives timestep ts
+geneflow = array(size=(len(unique(data[pop_id])), time_steps))
+for i in list(range(length(geneflow.shape[1]))):
+	geneflow[:,i] = poisson(geneflow.shape[0], some_distr_info)
+
+def random_parents(num_of_possible_parents, num_of_children):
+	parents = array(range(0, num_of_possible_parents))
+	return array([random.choice(parents, num_of_children),
+			random.choice(parents, num_of_children)])
+
+def create_offspring(parents, childrens_parents):
+	# TODO: test
+	p1 = parents[chidrens_parents[0,:],:]
+	p2 = parents[childrens_parents[1,:],:]
+	parents = array([p1, p2])
+	rand_idx = np.random.randint(2, size=(p1.shape[0], p1.shape[1]))
+	parent_idx = np.expand_dims(rand_idx, axis=1)
+	parent_arr = np.take_along_axis(parents, parent_idx, axis=1)
+	chidren = np.take_along_axis(parent_arr, np.expand_dims(np.arange(p1.shape[0]), axis=-1), axis=1)
+
+	return children
+
+# simulate timestep
+for ts in list(range(0, time_steps)):
+	new_data = data.copy()
+	
+	# randomly sample geneflow inds from each pop
+	start_pos = 0
+	for pop in list(range(geneflow.shape[0])):
+		end_pos = int(geneflow[pop,ts]*data[pop_id==pop])
+		new_data[start_pos:end_pos+start_pos,] = random_sample(data[pop_id==pop], end_pos)
+		start_pos = end_pos + 1
+	
+	
+	# simulate new indvidual from genepool
+	n_comb = data.shape[0] - startpos - 1
+	comb_m = random_parents(star_pos-1, n_comb) # create 2*n_comb matrix of parents rows
+	new_data[start_pos:,] = create_offspring(new_daya[0:start_pos-1], comb_m)
+
+	data = new_data
