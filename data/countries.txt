@@ -7,7 +7,6 @@ Crete
 Denmark
 Dodecanese
 Druze
-Rumelia
 Egypt
 Finland
 France
@@ -20,6 +19,7 @@ Mozabite
 North_Morocco
 Palestinian
 Peloponnese
+Rumelia
 Russia
 Sahara
 Sardinia

@@ -1,3 +1,4 @@
 data/PLINK*
 data/*.ped
 data/*.csv
+data/*.npz
