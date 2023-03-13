@@ -56,8 +56,8 @@ data = [np.array([list(map(int, row.split())) for row in data[col]]) for col in 
 data = np.stack(data, axis=0)
 data = data.transpose((1,0,2))
 
-np.savez("data/input_data", data)
-np.savez("data/input_index", populations)
+np.save("data/input_data", data)
+np.save("data/input_index", populations)
 
 origins = p_dist.country1.unique()
 geneflow = np.reshape(p_dist.p_dist.to_numpy(), (origins.shape[0], origins.shape[0]))
@@ -102,5 +102,5 @@ for ts in list(range(time_steps)):
     data = new_data
     populations = new_populations
 
-np.savez("data/output_data", data)
-np.savez("data/output_index", populations)
+np.save("data/output_data", data)
+np.save("data/output_index", populations)
